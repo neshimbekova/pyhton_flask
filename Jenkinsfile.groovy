@@ -4,6 +4,7 @@ node {
     git 'git@github.com:neshimbekova/Flaskex.git'
   }
   stage('Build application') {
+    sh "ssh ec2-user@${ENV} sudo yum install python-pip -y"
     sh "scp -r * ec2-user@${ENV}:/tmp"
     sh "ssh ec2-user@${ENV} sudo pip install -r /tmp/requirements.txt"
 
