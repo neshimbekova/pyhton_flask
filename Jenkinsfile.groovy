@@ -17,8 +17,12 @@ node {
     sh "ssh ec2-user@${ENV} sudo cp -r /tmp/flaskex.service  /etc/systemd/system"
   }
   stage("move files from tmp to /flaskex"){
+    try {
     sh "ssh ec2-user@${ENV} sudo cp -r /tmp/* /flaskex"
   }
+    catch(err){
+      sh "echo did not copy"
+    }
   stage("install requirements.txt"){
     sh "ssh ec2-user@${ENV} sudo pip install -r /tmp/requirements.txt"
   }
