@@ -1,4 +1,5 @@
 node {
+  properties([parameters([string(defaultValue: 'IP', description: 'Where to build?', name: 'ENV', trim: true)])])
   stage("Clone repo"){
     git 'git@github.com:neshimbekova/Flaskex.git'
   }
